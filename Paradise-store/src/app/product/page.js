@@ -465,6 +465,7 @@
 // };
 
 // export default Product;
+
 "use client";
 import styles from "./product.module.css";
 import { IoMdStar } from "react-icons/io";
@@ -474,19 +475,31 @@ import "react-datepicker/dist/react-datepicker.css";
 import ProductCard from "@/component/products/ProductCard";
 import AddOn from "@/component/common/AddOn";
 import { FaTimes } from "react-icons/fa";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, productApi } from "@/reduxToolKit/slice";
+import { productApi } from "@/reduxToolKit/slice";
 import { format } from "date-fns";
 import ReactImageMagnify from "react-image-magnify";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const Product = () => {
+const Product = ({ productId }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [message, setMessage] = useState("");
+  const [subOptions, setSubOptions] = useState([]);
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const [isAddOnOpen, setIsAddOnOpen] = useState(false);
+  const [mainImage, setMainImage] = useState("");
+  const [IDproducts, setIDProducts] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top on mount
-  }, []);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const product = useSelector((state) => state.productApiData);
 
   const options = {
     Morning: ["07:00 - 09:00"],
@@ -507,26 +520,7 @@ const Product = () => {
     LateNight: ["19:00 - 23:00"],
   };
 
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const [selectedCity, setSelectedCity] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [message, setMessage] = useState("");
-  const [subOptions, setSubOptions] = useState([]);
-  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const [isAddOnOpen, setIsAddOnOpen] = useState(false);
-  const [mainImage, setMainImage] = useState("");
-  const product = useSelector((state) => state.productApiData);
-  const [IDproducts, setIDProducts] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const ID = searchParams.get("id");
-
-  const fetchProduct = async () => {
+  const fetchProduct = async (ID) => {
     if (ID) {
       try {
         const response = await fetch(`${apiUrl}/getProductById`, {
@@ -546,11 +540,9 @@ const Product = () => {
           setIDProducts(data.product);
           setMainImage(data.product.imageUrl);
         } else {
-          console.error(data.message);
           setError(data.message);
         }
       } catch (error) {
-        console.error("Error fetching product:", error);
         setError(error.message);
       } finally {
         setLoading(false);
@@ -562,8 +554,10 @@ const Product = () => {
   };
 
   useEffect(() => {
-    fetchProduct();
-  }, [ID]);
+    if (productId) {
+      fetchProduct(productId);
+    }
+  }, [productId]);
 
   useEffect(() => {
     dispatch(productApi());
@@ -659,58 +653,61 @@ const Product = () => {
 
   return (
     <>
-      <div className={styles.main}>
-        <div className={styles.sliderImage}>
-          {[IDproducts.imageUrl, IDproducts.imageUrl1, IDproducts.imageUrl2].map((img, index) => (
-            <div key={index} onClick={() => handleImageClick(img)}>
-              <img src={img} alt={IDproducts.name} />
-            </div>
-          ))}
-        </div>
-        <div className={styles.mainimg}>
-          <ReactImageMagnify
-            {...{
-              smallImage: {
-                alt: "Main Product",
-                isFluidWidth: true,
-                src: mainImage,
-              },
-              largeImage: {
-                src: mainImage,
-                width: 900,
-                height: 1000,
-              },
-              enlargedImageContainerDimensions: {
-                width: "200%",
-                height: "100%",
-              },
-            }}
-          />
-        </div>
-        <div className={styles.nameprice}>
-          <h2>{IDproducts.name}</h2>
-          <div>
-            <div className={styles.starreview}>
-              <div className={styles.star}>
-                5 <span><IoMdStar className={styles.icon} /></span>
-              </div>
-              <div className={styles.review}>36 reviews</div>
-            </div>
-            <div className={styles.starreview}>
-              <div className={styles.review2}>
-                <div>{IDproducts.price}</div>
-              </div>
-            </div>
+    <div className={styles.main}>
+      <div className={styles.sliderImage}>
+        {[IDproducts.imageUrl, IDproducts.imageUrl1, IDproducts.imageUrl2].map((img, index) => (
+          <div key={index} onClick={() => handleImageClick(img)}>
+            <img src={img} alt={IDproducts.name} />
           </div>
-          <form className={styles.form}>
-            <div className={styles.inputdiv}>
-              <select
+        ))}
+      </div>
+      <div className={styles.mainimg}>
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: "Main Product",
+              isFluidWidth: true,
+              src: mainImage,
+            },
+            largeImage: {
+              src: mainImage,
+              width: 900,
+              height: 1000,
+            },
+            enlargedImageContainerDimensions: {
+              width: "200%",
+              height: "100%",
+            },
+          }}
+        />
+      </div>
+      <div className={styles.nameprice}>
+           <h2>{IDproducts.name}</h2>
+           <div>
+             <div className={styles.starreview}>
+               <div className={styles.star}>
+                 5{" "}
+                 <span>
+                   <IoMdStar className={styles.icon} />
+                 </span>
+               </div>
+               <div className={styles.review}>36 reviews</div>
+             </div>
+             <div className={styles.starreview}>
+               <div className={styles.review2}>
+                 <div>{IDproducts.price}</div>
+               </div>
+             </div>
+           </div>
+           <form className={styles.form}>
+             <div className={styles.inputdiv}>
+               <select
                 id="select"
                 value={selectedCity}
                 onChange={handleSelectCity}
                 className={styles.label}
               >
-                <option value="">Choose Country</option>
+                <option value="">choose Country</option>
                 <option value="Pakistan">Pakistan</option>
                 <option value="Oman">Oman</option>
                 <option value="America">America</option>
@@ -723,11 +720,12 @@ const Product = () => {
                 onChange={handleDateChange}
                 dateFormat="yyyy/MM/dd"
                 className={styles.label}
-                minDate={new Date()}
-                showPopperArrow={true}
+                minDate={new Date()} // Only allows present and future dates
+                showPopperArrow={true} // Optional: hide the popper arrow
                 placeholderText="Select a date"
                 disabled={!selectedCity}
                 onFocus={handleFocus}
+                // onBlur={handleBlur}
                 popperClassName={styles.customDatePickerPopper}
               />
               {isDatePickerOpen && (
@@ -739,7 +737,7 @@ const Product = () => {
                     dateFormat="yyyy/MM/dd"
                     inline
                     className={styles.popupDatePicker}
-                    minDate={new Date()}
+                    minDate={new Date()} // Only allows present and future dates
                   />
                 </div>
               )}
@@ -752,10 +750,10 @@ const Product = () => {
                 className={styles.label}
                 disabled={!selectedDate}
               >
-                <option value="">Select Method</option>
+                <option value="">select Method</option>
                 <option value="Morning">Morning Delivery</option>
                 <option value="FixTime">Standard Delivery</option>
-                <option value="Standard">Fixed Time Delivery</option>
+                <option value="Standard">Fixed Time Deliver</option>
                 <option value="LateNight">Midnight Delivery</option>
               </select>
             </div>
@@ -767,7 +765,7 @@ const Product = () => {
                 className={styles.label}
                 disabled={!selectedOption}
               >
-                <option value="">Select Time</option>
+                <option value="">Select time</option>
                 {subOptions.map((time, index) => (
                   <option key={index} value={time}>
                     {time}
@@ -784,20 +782,31 @@ const Product = () => {
                 disabled={!selectedTime}
               />
             </div>
+
             <div className={styles.tab2}>
               <div
                 className={`${styles.add} ${isDisabled ? styles.disabled : ""}`}
                 onClick={isDisabled ? null : handleCart}
                 style={isDisabled ? { pointerEvents: "none" } : {}}
               >
-                Add to Cart
+                Add to cart
               </div>
+              {/* <Link
+                className={`${styles.link} ${
+                  isDisabled ? styles.disabled : ""
+                }`}
+                href={isDisabled ? "#" : "/cart"}
+                scroll={false}
+                style={isDisabled ? { pointerEvents: "none" } : {}}
+              > */}
               <div
                 className={styles.buy}
                 onClick={isDisabled ? null : handleProceed}
               >
                 Buy Now
               </div>
+
+              {/* </Link> */}
             </div>
           </form>
           <div className="description">
@@ -817,17 +826,33 @@ const Product = () => {
             <div className="deliveryinformation">
               <h3>Delivery Information</h3>
               <ul className={styles.para}>
-                <li>All orders are delivered via temperature-controlled delivery vans.</li>
-                <li>Your cake will arrive beautifully fresh for your occasion. We recommend that the cake(s) are stored in refrigerator before consumption.</li>
-                <li>We recommend you to open the box upon handover and before leaving of our delivery executive.</li>
+                <li>
+                  All orders are delivered via Ferns N Petals
+                  temperature-controlled delivery vans.
+                </li>
+                <li>
+                  Your cake will arrive beautifully fresh for your occasion. We
+                  recommend that the cake(s) are stored in refrigerator before
+                  consumption.
+                </li>
+                <li>
+                  We recommend you to open the box upon handover and before
+                  leaving of our delivery executive.
+                </li>
               </ul>
             </div>
             <div className="deliveryinformation">
-              <h3>Care Instructions</h3>
+              <h3>Care Instructor</h3>
               <ul className={styles.para}>
                 <li>Upon receiving the cake, refrigerate it immediately.</li>
-                <li>Fondant cakes should be stored in an air-conditioned environment before consumption.</li>
-                <li>Slice and serve the cake at room temperature and make sure it is not exposed to heat.</li>
+                <li>
+                  Fondant cakes should be stored in an air conditioned
+                  environment before consumption.
+                </li>
+                <li>
+                  Slice and serve the cake at room temperature and make sure it
+                  is not exposed to heat.
+                </li>
                 <li>The cake should be consumed within 48 hours.</li>
                 <li>Enjoy your cake!</li>
               </ul>
@@ -838,43 +863,68 @@ const Product = () => {
 
       <div className={styles.seller}>
         <div className={styles.heading2}>
-          <h2>What Others Are Watching</h2>
+          <h2>What others are Watching</h2>
         </div>
         <div className={styles.prodContainer}>
           <div className={styles.prod}>
-            {product.map((prod, index) => (
+            {product.map((product, index) => (
               <ProductCard
                 key={index}
-                name={prod.name}
-                price={prod.price}
-                imageUrl={prod.imageUrl}
-                onClick={() => handleProductClick(prod)}
+                name={product.name}
+                price={product.price}
+                imageUrl={product.imageUrl}
+                onClick={() => handleProductClick(product)}
               />
             ))}
           </div>
         </div>
       </div>
-
-      {isAddOnOpen && (
-        <>
-          <div className={styles.backdrop} />
-          <section className={styles.AddOn}>
-            <div className={styles.top}>
-              <h2>Add Something Extra to Make It Special</h2>
-              <FaTimes className={styles.icon} onClick={closeCart} />
-            </div>
-            <AddOn />
-            <div className={styles.bottom}>
-              <h2>Bottom</h2>
-              <button className={styles.button2} onClick={handleClick}>
-                Continue Without Add-On
-              </button>
-            </div>
-          </section>
-        </>
-      )}
-    </>
+      {/* <div className={styles.tab}>
+        <div className={styles.add} onClick={handleCart}>
+          Add To Cart
+        </div>
+        <div
+                className={styles.buy}
+                onClick={isDisabled ? null : handleProceed}
+              >
+                Buy Now
+              </div>
+      </div>
+       */}
+     
+    
+    
+   {isAddOnOpen && (
+          <>
+            <div className={styles.backdrop} />
+            <section className={styles.AddOn}>
+              <div className={styles.top}>
+                <h2>Add on something to make it extra special</h2>
+                <FaTimes className={styles.icon} onClick={closeCart} />
+              </div>
+  
+              <AddOn />
+              <div className={styles.bottom}>
+                <h2>Bottom</h2>
+                <a className={styles.link} scroll={false} onClick={handleClick}>
+                  <button className={styles.button2}>
+                    {" "}
+                    Continue Without Add On
+                  </button>
+                </a>
+              </div>
+            </section>
+          </>
+        )}
+   </>
   );
 };
 
-export default Product;
+const WrappedProduct = () => {
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("id");
+
+  return <Product productId={productId} />;
+};
+
+export default WrappedProduct;

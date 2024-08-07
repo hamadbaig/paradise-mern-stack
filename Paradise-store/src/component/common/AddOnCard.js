@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import styles from "./AddOnCard.module.css"; // Assuming your CSS module is named AddOnCard.module.css
 
-const AddOnCard = ({ name, price, imageUrl, imageUrl2, imageUrl3 }) => {
-  const images = [imageUrl, imageUrl2, imageUrl3];
+// const AddOnCard = ({ name, price, imageUrl, imageUrl2, imageUrl3 }) => {
+const AddOnCard = ({ name, price,  imageUrl2, imageUrl3 }) => {
+
+  const images = [ imageUrl2, imageUrl3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
