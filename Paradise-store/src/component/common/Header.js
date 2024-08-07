@@ -70,19 +70,19 @@ const Header = () => {
   return (
     <>
       <div className={styles.topbaar}>
-        <div>
+        <div className={styles.cat}>
           <text>AED</text>
         </div>
-        <div>
+        <div className={styles.cat}>
           <text>Call Us +971 43387676</text>
         </div>
-        <div>
+        <div className={styles.cat}>
           <text>العربية</text>
         </div>
       </div>
       <div className={styles.header}>
         <div className={styles.logo}>
-          <div className={styles.logoDiv}
+          <div className={`${styles.logoDiv} ${styles.cat}`} 
           onClick={() => goToHome()}>
             <img src="/Paradiselogo2.png" className={styles.logoimg} />
           </div>
@@ -95,7 +95,7 @@ const Header = () => {
               value={query}
               onChange={handleInputChange}
             />
-            <button className={styles.searchButton} onClick={handleSearch}>
+            <button className={`${styles.searchButton} ${styles.cat}`} onClick={handleSearch}>
               <FaSearch className={styles.searchIcon} />
             </button>
           </div>
@@ -115,19 +115,19 @@ const Header = () => {
         </div>
         <div className={styles.multitimes2}>
          
-          <div>
+          <div className={styles.cat}>
             <IoMdHelpCircleOutline className={styles.icon} />
             <text>Help</text>
           </div>
-          <div>
+          <div className={styles.cat}>
             <MdOutlineCorporateFare className={styles.icon} />
             <text>Corporate</text>
           </div>
-          <div onClick={()=>(goToCart())}>
+          <div onClick={()=>(goToCart())} className={styles.cat}>
             <FaCartShopping className={styles.icon} />
             <text>Cart</text>
           </div>
-          <div>
+          <div className={styles.cat}>
             <IoMdContact className={styles.icon} />
             <text>Account</text>
           </div>
@@ -139,7 +139,7 @@ const Header = () => {
             ) : (
               <FaBars className={styles.icon} onClick={handleToggle} />
             )}
-            <div className={styles.multitimes}>
+            <div className={`${styles.multitimes} ${styles.cat}`}>
               <FaSearch className={styles.icon} />
               <MdCardGiftcard className={styles.icon} />
               <FaCartShopping className={styles.icon} />
@@ -212,6 +212,7 @@ const Header = () => {
         {Categories.map((category) => (
          
             <div
+            className={styles.cat}
             onClick={categoryFind(category)}>
               {category.name}
               <span>

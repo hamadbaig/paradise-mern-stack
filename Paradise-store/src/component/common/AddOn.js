@@ -125,11 +125,12 @@ const AddOn= ()=> {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState(null); // Add error state
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:8000/getAddOn');
+        const response = await fetch(`${apiUrl}/getAddOn`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

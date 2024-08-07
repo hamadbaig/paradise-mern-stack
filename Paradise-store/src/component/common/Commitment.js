@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import ProductCard from "../products/ProductCard";
 import styles from "./Commitment.module.css";
 import { TiTick } from "react-icons/ti";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { productApi } from "@/reduxToolKit/slice";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -63,7 +62,7 @@ const Commitment = () => {
         </div>
         <div className={styles.heading2}>
           <h2>Our Best Selling Product</h2>
-          <div>View All</div>
+          <div className={styles.cat}>View All</div>
         </div>
         <div className={styles.prod}>
           {product.map((product, index) => (
@@ -89,7 +88,7 @@ const Commitment = () => {
         </div>
         <div className={styles.heading2}>
           <h2>Jully special</h2>
-          <div>View All</div>
+          <div className={styles.cat}>View All</div>
         </div>
         <div className={styles.prod}>
           {product.map((product, index) => (

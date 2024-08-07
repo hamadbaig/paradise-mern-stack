@@ -9,7 +9,7 @@ const initialState = {
 };
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 export const productApi = createAsyncThunk("productApi", async () => {
-  console.log(apiUrl, "env");
+  // console.log(apiUrl, "env");
   const response = await fetch(`${apiUrl}/getProducts`);
   const data = await response.json();
   return data.products; // Return products array directly

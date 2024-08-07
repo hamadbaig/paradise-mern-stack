@@ -1,26 +1,32 @@
 .main {
   background-color: white;
 }
+
 .demoimg {
   display: none;
 }
+
 .mainimg {
   width: 100%;
 }
+
 .mainimg img {
   width: 100%;
 }
+
 .nameprice {
   padding: 2rem;
   display: block;
   justify-content: space-between;
   align-items: center;
 }
+
 .starreview {
   display: flex;
 
   gap: 1rem;
 }
+
 .star {
   background-color: #7e2a66;
   font-size: 2rem;
@@ -28,21 +34,26 @@
   border-radius: 4px;
   padding: 0.2rem;
 }
+
 .review {
   color: dodgerblue;
   font-size: 1.5rem;
 }
+
 .review2 {
   font-size: 2rem;
 }
+
 .review2 span {
   font-size: 1.2rem;
   margin-top: 0.5rem;
 }
+
 .form {
   background-color: #f4f4f4;
   padding: 1.5rem;
 }
+
 .label {
   /* width: 100%;
   color: darkgray;
@@ -52,10 +63,12 @@
   padding: 10px;
   font-size: 16px;
 }
+
 .inputdiv {
   margin-bottom: 2rem;
   width: 90%;
 }
+
 .tab {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -63,6 +76,7 @@
   position: fixed;
   bottom: 0px;
 }
+
 .tab2 {
   display: none;
 }
@@ -73,37 +87,46 @@
   font-size: 2rem;
   font-weight: bolder;
 }
+
 .AddToCart {
   width: 50%;
 }
+
 .add {
   background-color: #7e2a66;
   color: black;
 }
+
 .buy {
   background-color: chocolate;
   color: white;
 }
+
 .seller {
   background-color: #ffff;
   padding: 3rem;
 }
+
 .seller div h2 {
   text-align: center;
   font-size: 3rem;
 }
+
 .seller div p {
   text-align: center;
   font-size: 2rem;
 }
+
 .heading2 {
   display: flex;
   justify-content: space-between;
 }
+
 .heading2 h2 {
   font-size: 3rem;
   font-weight: bold;
 }
+
 .heading2 div {
   display: flex;
   justify-content: center;
@@ -115,15 +138,18 @@
   color: white;
   border-radius: 8%;
 }
+
 .prodContainer {
   height: 400px;
   overflow-y: auto;
 }
+
 .prod {
   display: flex;
   justify-content: space-evenly;
   gap: 2rem;
 }
+
 .description {
   font-family: Arial, sans-serif;
   margin: 20px;
@@ -153,28 +179,36 @@
 .para li {
   margin-bottom: 1rem;
 }
+
 .AddOn {
   width: 70%;
-  height: 80%; /* Adjusted to enable scroll */
+  height: 80%;
+  /* Adjusted to enable scroll */
   position: fixed;
-  z-index: 1000; /* Ensure it is above the backdrop */
+  z-index: 1000;
+  /* Ensure it is above the backdrop */
   top: 10%;
   left: 10%;
   background-color: #fff;
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
-  z-index: 999; /* Ensure it is on top */
+  background: rgba(0, 0, 0, 0.8);
+  /* Semi-transparent black */
+  z-index: 999;
+  /* Ensure it is on top */
 }
+
 .divIcon {
   cursor: pointer;
 }
@@ -182,11 +216,13 @@
 .divIcon .icon {
   font-size: 3rem;
 }
+
 .btnDiv {
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .bottom {
   display: flex;
   justify-content: space-between;
@@ -197,12 +233,14 @@
   padding: 1rem;
   text-align: center;
 }
+
 .button {
   border: 1px solid lightgray;
   padding: 1rem;
   font-size: 3rem;
   background-color: #fff;
 }
+
 .button2 {
   background-color: chocolate;
   color: white;
@@ -210,6 +248,7 @@
   padding: 1rem;
   border-radius: 10px;
 }
+
 .top {
   display: flex;
   justify-content: space-between;
@@ -220,12 +259,18 @@
   padding: 1rem;
   font-weight: 600;
 }
+
 .link {
   text-decoration: none;
   color: black;
 }
+
 .sliderImage {
   display: none;
+}
+
+.cat:hover {
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -233,42 +278,46 @@
     display: flex;
     align-items: flex-start;
   }
-  
+
   .sliderImage {
     display: flex;
     flex-direction: column;
     margin-right: 20px;
   }
-  
+
   .sliderImage div {
     margin-bottom: 10px;
     cursor: pointer;
   }
-  
+
   .mainimg {
     position: relative;
     z-index: 5;
   }
-  
+
   .AddOn {
     left: 15% !important;
   }
+
   .main {
     display: flex;
     justify-content: space-around;
     padding: 2rem;
     gap: 1rem;
   }
+
   .sliderImage {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
+
   .sliderImage div {
     width: 120px;
     height: 120px;
     border: 2px solid transparent;
   }
+
   .sliderImage div:hover {
     border: 2px solid #7e2a66;
   }
@@ -281,27 +330,34 @@
   .mainimg {
     width: 40%;
   }
+
   .nameprice {
     width: 40%;
     height: 100vh;
     overflow: scroll;
   }
+
   .nameprice::-webkit-scrollbar {
     display: none;
   }
+
   .nameprice h2 {
     font-size: 2rem;
   }
+
   .starview {
     gap: 2rem;
   }
+
   .review2 {
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
+
   .review2 div {
     font-size: 3.5rem;
   }
+
   .description {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -332,9 +388,11 @@
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
+
   .tab {
     display: none;
   }
+
   .tab2 {
     display: block;
     display: grid;
@@ -342,6 +400,7 @@
     width: 100%;
     gap: 1rem;
   }
+
   .tab2 div {
     text-align: center;
     padding: 1rem;
@@ -349,12 +408,14 @@
     font-weight: bolder;
     border-radius: 10px;
   }
+
   .form {
     display: flex;
     justify-content: space-between;
 
     flex-wrap: wrap;
   }
+
   .inputdiv {
     margin-bottom: 2rem;
     width: 45%;
@@ -363,6 +424,7 @@
     align-items: center;
     position: relative;
   }
+
   .inputdiv {
     position: relative;
   }

@@ -3,10 +3,12 @@
   /* width: 100%; */
   font-size: 18px;
 }
+
 .Footermain {
   display: grid;
   grid-template-columns: repeat(3, 1FR);
 }
+
 .signupcontainer {
   border: 2px solid white;
 }
@@ -66,6 +68,7 @@
 .submitbutton:hover {
   background-color: #e65c00;
 }
+
 .Footersecond {
   display: flex;
   justify-content: center;
@@ -73,6 +76,7 @@
   flex-wrap: wrap;
   color: black;
 }
+
 .Footersecond div {
   /* width: 130px; */
   width: auto;
@@ -83,27 +87,37 @@
   padding-right: 1rem;
   margin: 1rem;
 }
+
 .Footersecond div:hover {
-  color: #ff6600;
+  color: #7e2a66;
 }
+
 .connect {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .ftlogo2 {
   width: 50px;
   height: 50px;
 }
+
 .ftlogo {
   width: 70px;
   height: 50px;
 }
+
 .ftlogo img,
 .ftlogo2 img {
   width: 100%;
   height: 100%;
 }
+
+.cat:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 1024px) {
   .Footer {
     display: none;

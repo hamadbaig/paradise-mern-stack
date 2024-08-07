@@ -10,7 +10,7 @@ const ProductCard = ({
 }) => {
   return (
     <>
-      <div className={styles.card} onClick={onClick}>
+      <div className={`${styles.card} ${styles.cat}`} onClick={onClick}>
         {/* <Link
           className={styles.link}
           href={{
@@ -19,7 +19,7 @@ const ProductCard = ({
           }}
           scroll={false}
         > */}
-        <div className={styles.cardpic}>
+        <div className={styles.cardpic} >
           <img src={imageUrl} className={styles.logoimg} />
         </div>
         <h3>{name}</h3>

@@ -97,7 +97,9 @@ const Product = () => {
   useEffect(() => {
     dispatch(productApi());
   }, [dispatch]);
-
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, []);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!IDproducts) return <div>No product selected</div>;
@@ -320,7 +322,7 @@ const Product = () => {
 
             <div className={styles.tab2}>
               <div
-                className={`${styles.add} ${isDisabled ? styles.disabled : ""}`}
+                className={`${styles.add} ${styles.cat} ${isDisabled ? styles.disabled : ""}`}
                 onClick={isDisabled ? null : handleCart}
                 style={isDisabled ? { pointerEvents: "none" } : {}}
               >
@@ -335,7 +337,7 @@ const Product = () => {
                 style={isDisabled ? { pointerEvents: "none" } : {}}
               > */}
               <div
-                className={styles.buy}
+                className={`${styles.buy} ${styles.cat}`}
                 onClick={isDisabled ? null : handleProceed}
               >
                 Buy Now

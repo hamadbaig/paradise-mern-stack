@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from "react";
 import styles from "./AddOnCard.module.css"; // Assuming your CSS module is named AddOnCard.module.css
 

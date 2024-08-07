@@ -62,21 +62,22 @@ const Footer = () => {
           </div>
         </div>
         <div className={styles.Footersecond}>
-          <div>Anniversery </div>
-          <div>Birthday</div>
-          <div>Flowers</div>
-          <div>Cake</div>
-          <div>Personalised</div>
-          <div>Hamper</div>
-          <div>More Gift</div>
-          <div>Brands</div>
-          <div>Ocassion</div>
-          <div>Global</div>
-          <div>Hamper</div>
-          <div>More Gift</div>
-          <div>Brands</div>
-          <div>Ocassion</div>
-          <div>Global</div>
+          <div className={styles.cat}>Anniversery </div>
+          <div className={styles.cat}>Anniversery </div>
+          <div className={styles.cat}>Birthday</div>
+          <div className={styles.cat}>Flowers</div>
+          <div className={styles.cat}>Cake</div>
+          <div className={styles.cat}>Personalised</div>
+          <div className={styles.cat}>Hamper</div>
+          <div className={styles.cat}>More Gift</div>
+          <div className={styles.cat}>Brands</div>
+          <div className={styles.cat}>Ocassion</div>
+          <div className={styles.cat}>Global</div>
+          <div className={styles.cat}>Hamper</div>
+          <div className={styles.cat}>More Gift</div>
+          <div className={styles.cat}>Brands</div>
+          <div className={styles.cat}>Ocassion</div>
+          <div className={styles.cat}>Global</div>
         </div>
         <p className={styles.signuptitle}>
           Copyright © 2024 www.paradise.com.All rights reserved
