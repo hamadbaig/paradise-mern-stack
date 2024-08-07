@@ -15,9 +15,10 @@ import { format } from "date-fns";
 import ReactImageMagnify from "react-image-magnify";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const Product = ({ productId }) => {
+const Product = () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  
+  const searchParams = useSearchParams();
+  const productId = searchParams.get("id");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
@@ -455,12 +456,11 @@ const Product = ({ productId }) => {
 };
 
 const WrappedProduct = () => {
-  const searchParams = useSearchParams();
-  const productId = searchParams.get("id");
+ 
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Product productId={productId} />
+      <Product  />
     </Suspense>
   );
 };
